@@ -61,37 +61,69 @@
           <div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-xs-5" id = "rightCorner" style="background-color: white; padding: 2.3%;">
             <!--- LOG IN FORM  ------------------------------------------------------------>
             <?php
+            $enc = md5($_POST["logpwd"]);
 
-            //
-            // 3. Get email and password input from fields
-            //
-            $email = $_POST["logemail"];
-            $pwd = $_POST["logpwd"];
+            $db = mysqli_connect("localhost","c2375a03","c2375aU!");
+            if (mysqli_errno($db))
+               exit("Error - Could not connect to MySQL");
 
-            //
-            // 4. Issue SQL request.
-            //
-            $query = "select first_name from Customer where email = '$email' AND pwd = '$pwd';";
-            $result = mysqli_query($db, $query);
-            if (!$result) {
-              print "Error - query cannot be processed: ";
-              $error = mysqli_error($db);
-              print "$error";
-              exit;
+            // Select testing DB (change to your own)
+            $er = mysqli_select_db($db,"c2375a03test");
+            if (!$er)
+               exit("Error - Could not select the database!");
+
+            $logemail = $_POST["logemail"];
+            $logpwd = $_POST["logpwd"];
+
+            $query = "select email, pwd, last_name, first_name, country from Customer where email = '" . $logemail . "';";
+
+            $query2 = "select image_path from book join bookhistory on bookhistory.book_id = book.book_id join Customer on Customer.id = bookhistory.cust_id where email = '" . $logemail . "';";
+            $result2 = mysqli_query($db, $query2);
+            if (!$result2) {
+               print "Error - Select query cannot be processed: 2";
+               $error = mysql_error();
+               print "$error";
+               exit;
             }
-            //
-            // 4. Process the result.
-            //
-            $num_rows = mysqli_num_rows($result);
 
-            for($i = 0; $i < $num_rows; $i++) {
-              $row = mysqli_fetch_row($result);
-              print "<br><br><h3>Hello, "."$row[0]".". Welcome back!</h3>";
+            // get rows from mysqli_more_result
+            // multiple rows are possible, go through the loop and pull the img paths
+
+            $result = mysqli_query($db,$query);
+            if (!$result) {
+               print "Error - Select query cannot be processed: ";
+               $error = mysql_error();
+               print "$error";
+               exit;
+            }
+
+            // should only be 1 row because the registration doesn't permit using the same email multiple times
+            $row = mysqli_fetch_row($result);
+            $rowemail = $row[0];
+            $rowpwd = $row[1];
+            $rowlname = $row[2];
+            $rowfname = $row[3];
+            $rowcountry = $row[4];
+
+            // validate the password
+            if(!password_verify($logpwd, $rowpwd)){
+              print "<br><br><h3> It looks like you entered the wrong password. Please go back to try again.</h3>";
+            }
+            else{
+              print "<br><br><h3>Hello, "."$rowfname".". Welcome back!</h3>";
+
+              // start session
+              session_start();
+              session_regenerate_id (true); //prevent against session fixation attacks.
+              $_SESSION['user_id']= $rowfname;
+              $_SESSION['lastName'] = $rowlname;
+              $_SESSION['email'] = $rowemail;
+              $_SESSION['country']= $rowcountry;
+              header("Location: profile.php");
             }
 
             ?>
-
-
+          </div>
           </header>
         </body>
         <main>

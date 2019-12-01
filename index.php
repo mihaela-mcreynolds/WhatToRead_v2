@@ -58,22 +58,25 @@
           <!-- Top Right corner -->
           <div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-xs-5" id = "rightCorner" style="background-color: white; padding: 2.3%;">
             <!--- LOG IN FORM  ------------------------------------------------------------>
-            <form action = "login.php" method = "post">
+            <?php
+							if(!isset($_SESSION['user_id']))
+							  print '
+                <form action = "login.php" method = "post">
               <div class="form-group">
-                <label for="exampleInputEmail1" style="color: #324519;">Email address
+                <label for="exampleInputEmail1" style="color: 	333300;">Email address
                 </label>
                 <input type="email" class="form-control" name="logemail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email@email.com">
-                <small id="emailHelp" class="form-text text-muted" style="color: #8a0e0b;">We'll never share your email with anyone else.
+                <small id="emailHelp" class="form-text text-muted" style="color: blue;">We will never share your email with anyone else.
                 </small>
               </div>
               <div class="form-group">
-                <label for="exampleInputPassword1" style="color: #324519;">Password
+                <label for="exampleInputPassword1" style="color: 	333300;">Password
                 </label>
                 <input type="password" class="form-control" name="logpwd" id="exampleInputPassword1" placeholder="Password...">
               </div>
               <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1" style="color: #324519;">Remember me
+                <label class="form-check-label" for="exampleCheck1" style="color: 	333300;">Remember me
                 </label>
               </div>
               <div class="container" style="margin: 0;">
@@ -85,7 +88,17 @@
                     <!-- Register button -->
                     <a class="btn btn-warning" href ="register.php" style="margin-left:20px;">Register
                     </a>
-                  </form>
+                  </form>';
+							else{
+                print '<div class="login-corner"><p style="padding: 25px; margin-top: 30px;">
+                Hello, '.$_SESSION["user_id"].'. Welcome back!
+                <br></p><a class="btn btn-warning" href = "bookshelf.php">My Bookshelf</a><a class="btn btn-warning" href="profile.php";" style="margin-left:20px;">My Profile</a><a class="btn btn-warning" href = "logout.php" style="margin-left:20px;">Log out</a>';
+              }
+						 ?>
+			<!-- Search form -->
+				 <!-- <div class="active-purple-3 active-purple-4 mb-4">
+					 <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+				 </div> -->
                 </div>
               </div>
             </div>

@@ -55,120 +55,130 @@
 					</nav>
 				</div>
 				<!-- Top Right corner -->
-				<div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-xs-5" style="background-color: white; padding: 2.3%;">
+				<div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-xs-5" id = "rightCorner" style="background-color: white; padding: 2.3%;">
 					<!--- LOG IN FORM  ------------------------------------------------------------>
-					<form action = "login.php" method = "post">
-						<div class="form-group">
-							<label for="exampleInputEmail1" style="color: #324519;">Email address
-							</label>
-							<input type="email" class="form-control" name="logemail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email@email.com">
-							<small id="emailHelp" class="form-text text-muted" style="color: #8a0e0b;">We'll never share your email with anyone else.
-							</small>
+					<?php
+							if(!isset($_SESSION['user_id']))
+							  print '
+                <form action = "login.php" method = "post">
+              <div class="form-group">
+                <label for="exampleInputEmail1" style="color: 	333300;">Email address
+                </label>
+                <input type="email" class="form-control" name="logemail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email@email.com">
+                <small id="emailHelp" class="form-text text-muted" style="color: blue;">We will never share your email with anyone else.
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1" style="color: 	333300;">Password
+                </label>
+                <input type="password" class="form-control" name="logpwd" id="exampleInputPassword1" placeholder="Password...">
+              </div>
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1" style="color: 	333300;">Remember me
+                </label>
+              </div>
+              <div class="container" style="margin: 0;">
+                <div class="input-group">
+                  <div class="row" style="flex: 1; padding-left: 20px; padding-right: 20px;">
+                    <!-- Log in button -->
+                    <button type="submit" class="btn btn-warning" name = "login-submit">Log in
+                    </button>
+                    <!-- Register button -->
+                    <a class="btn btn-warning" href ="register.php" style="margin-left:20px;">Register
+                    </a>
+                  </form>';
+							else{
+								print '<div class="login-corner"><p style="padding: 25px; margin-top: 30px;">
+	              Hello, '.$_SESSION["user_id"].'. Welcome back!
+	              <br></p><a class="btn btn-warning" href = "bookshelf.php">My Bookshelf</a><a class="btn btn-warning" href="profile.php";" style="margin-left:20px;">My Profile</a><a class="btn btn-warning" href = "logout.php" style="margin-left:20px;">Log out</a>';
+	            }
+						 ?>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Page body -->
+		<div class="container" onload = "startQuiz()">
+			<div class="container text-center" style="padding:20px; float:left;">
+				<h4> Great! Keep going to find what to read next. </h4><br><hr>
+				<h5 class="display-5" style="color: #8a0e0b;">Choose a second:
+				</h5><hr>
+				<div class="border border-warning" id = "quiz">
+					<!-- Quiz options in a grid of pictures -->
+					<div class="row">
+						<div class="column">
+							<a href="selection_02.php"><img id = "hobbit" src="images/hobbit.jpg" alt="Hobbit Book Cover"></a>
+							<a href="selection_02.php"><img id = "acryingshame" src="images/acryingshame.png" alt="A Crying ShameBook Cover"></a>
 						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1" style="color: #324519;">Password
-							</label>
-							<input type="password" class="form-control" name="logpwd" id="exampleInputPassword1" placeholder="Password...">
+						<div class="column">
+							<a href="selection_02.php"><img id = "allegiant" src="images/allegiant.jpg" alt="Allegiant Book Cover"></a>
+							<a href="selection_02.php"><img id = "asylum" src="images/asylum.png" alt="Asylum Book Cover"></a>
 						</div>
-						<div class="form-group form-check">
-							<input type="checkbox" class="form-check-input" id="exampleCheck1">
-							<label class="form-check-label" for="exampleCheck1" style="color: #324519;">Remember me
-							</label>
+						<div class="column">
+							<a href="selection_02.php"><img id= "waterforelephants" src="images/waterforelephants.png" alt="Water for Elephants Book Cover"></a>
+							<a href="selection_02.php"><img id = "mockingbird" src="images/killamockingbird.png" alt="To Kill a Mockingbird Book Cover"></a>
 						</div>
-						<div class="container" style="margin: 0;">
-							<div class="input-group">
-								<div class="row" style="flex: 1; padding-left: 20px; padding-right: 20px;">
-									<!-- Log in button -->
-									<button type="submit" class="btn btn-warning" name = "login-submit">Log in
-									</button>
-									<!-- Register button -->
-									<a class="btn btn-warning" href ="register.php" style="margin-left:20px;">Register
-									</a>
-								</form>
-							</div>
+						<div class="column">
+							<a href="selection_02.php"><img id = "girlsofjuly" src="images/girlsofjuly.png" alt="Girls of July Book Cover"></a>
+							<a href="selection_02.php"><img id = "gameofthrones" src="images/gameofthrones.png" alt="A Game of Thrones Book Cover"></a>
 						</div>
 					</div>
 				</div>
-				<!-- Page body -->
-				<div class="container" onload = "startQuiz()">
-					<div class="container text-center" style="padding:20px; float:left;">
-						<h4> Great! Keep going to find what to read next. </h4><br><hr>
-						<h5 class="display-5" style="color: #8a0e0b;">Choose a second:
-						</h5><hr>
-						<div class="border border-warning" id = "quiz">
-							<!-- Quiz options in a grid of pictures -->
-							<div class="row">
-								<div class="column">
-									<a href="selection_02.php"><img id = "hobbit" src="images/hobbit.jpg" alt="Hobbit Book Cover"></a>
-									<a href="selection_02.php"><img id = "acryingshame" src="images/acryingshame.png" alt="A Crying ShameBook Cover"></a>
-								</div>
-								<div class="column">
-									<a href="selection_02.php"><img id = "allegiant" src="images/allegiant.jpg" alt="Allegiant Book Cover"></a>
-									<a href="selection_02.php"><img id = "asylum" src="images/asylum.png" alt="Asylum Book Cover"></a>
-								</div>
-								<div class="column">
-									<a href="selection_02.php"><img id= "waterforelephants" src="images/waterforelephants.png" alt="Water for Elephants Book Cover"></a>
-									<a href="selection_02.php"><img id = "mockingbird" src="images/killamockingbird.png" alt="To Kill a Mockingbird Book Cover"></a>
-								</div>
-								<div class="column">
-									<a href="selection_02.php"><img id = "girlsofjuly" src="images/girlsofjuly.png" alt="Girls of July Book Cover"></a>
-									<a href="selection_02.php"><img id = "gameofthrones" src="images/gameofthrones.png" alt="A Game of Thrones Book Cover"></a>
-								</div>
-							</div>
+			</div>
+			<!-- Book of the Month -->
+			<div class="container-fluid">
+				<div class="flex-row">
+					<div class="card img-fluid mx-auto" style="width: 18rem; text-align: center; padding: 20px; border: none; margin-top: 30px;">
+						<img src="images/homegoing.jpg" class="img-responsive mx-auto" style="max-width: 200px; margin-top: 30px;">
+						<div class="h4 mx-auto"><br>Book of the month
 						</div>
 					</div>
-					<!-- Book of the Month -->
-		      <div class="container-fluid">
-		        <div class="flex-row">
-		          <div class="card img-fluid mx-auto" style="width: 18rem; text-align: center; padding: 20px; border: none; margin-top: 30px;">
-		            <img src="images/homegoing.jpg" class="img-responsive mx-auto" style="max-width: 200px; margin-top: 30px;">
-		            <div class="h4 mx-auto"><br>Book of the month
-		            </div>
-		          </div>
-		          <br>
-		          <div class="col-xl-8 mx-auto" style="border-top: 1px solid #f0d38e; margin-top: 20px;">
-		            <br><h6> Winner of the PEN/ Hemingway Award</h6><br>
-								<p class="text-center"><strong>
-									Homegoing</strong> follows the parallel paths of these sisters and their descendants through eight generations:
-									from the Gold Coast to the plantations of Mississippi, from the American Civil War to Jazz Age Harlem.
-									Yaa Gyasi’s extraordinary novel illuminates slavery’s troubled legacy both for those who were taken and those
-									who stayed—and shows how the memory of captivity has been inscribed on the soul of our nation.
-								</p>
-							</div>
-						</div>
+					<br>
+					<div class="col-xl-8 mx-auto" style="border-top: 1px solid #f0d38e; margin-top: 20px;">
+						<br><h6> Winner of the PEN/ Hemingway Award</h6><br>
+						<p class="text-center"><strong>
+							Homegoing</strong> follows the parallel paths of these sisters and their descendants through eight generations:
+							from the Gold Coast to the plantations of Mississippi, from the American Civil War to Jazz Age Harlem.
+							Yaa Gyasi’s extraordinary novel illuminates slavery’s troubled legacy both for those who were taken and those
+							who stayed—and shows how the memory of captivity has been inscribed on the soul of our nation.
+						</p>
 					</div>
+				</div>
+			</div>
 
-					<script>
-					const quizContainer = document.getElementById("quiz");
-					const submitButton = document.getElementById("quizSubmit");
+			<script>
+			const quizContainer = document.getElementById("quiz");
+			const submitButton = document.getElementById("quizSubmit");
 
-					function startQuiz(questions, quizContainer, submitButton) {
-						function showQuestions(questions, quizContainer){}
-						submitButton.hide();
-					}
-					function sowResult(questions, quizContainer){
+			function startQuiz(questions, quizContainer, submitButton) {
+				function showQuestions(questions, quizContainer){}
+				submitButton.hide();
+			}
+			function sowResult(questions, quizContainer){
 
-					}
+			}
 
-					showQuestions(questions, quizContainer);
+			showQuestions(questions, quizContainer);
 
-					submitButton.onclick = function(){
-						showResults(questions, quizContainer)
-					}
+			submitButton.onclick = function(){
+				showResults(questions, quizContainer)
+			}
+		}
+
+		var myQuestions = [
+			{
+				answers: {
+					a:
 				}
+			}
+		]
 
-				var myQuestions = [
-					{
-						answers: {
-							a:
-						}
-					}
-				]
+		</script>
+	</body>
+	</html>
 
-				</script>
-			</body>
-			</html>
+	<!-- Bottom of the page -->
 
-			<!-- Bottom of the page -->
-
-			<?php require "footer.php" ?>
+	<?php require "footer.php" ?>

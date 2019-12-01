@@ -5,12 +5,23 @@
 <html lang="en">
 <head>
 	<!-- Meta tags -->
-	<meta charset="utf-8">
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!-- Author and Description -->
 	<meta name="author" content="Mihaela McReynolds & Annette Emily Farah">
 	<meta name="description" content="What To Read - group project for Internet Software Development class at PSTCC.">
+
+<!-- added by Mihaela -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script src="https://kit.fontawesome.com/64d06c75d0.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="prefix-free.js" type="text/javascript"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 
 	<!-- Bootstrap Libraries -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -18,7 +29,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 	<!-- CSS files -->
-	<style type="text/css"> @import url(wtr.css)</style>
+<link rel="stylesheet" href ="wtr.css">
 
 	<title>What To Read | Contact</title>
 </head>
@@ -64,24 +75,53 @@ Webpage Body
 				</div>
 
 				<!-- Top Right corner -->
-				<div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-xs-5" style="padding: 0;">
-					<div class="login-corner">
-						<p style="padding: 25px; margin-top: 30px;">
-							Hello, Johanna!</br>
-						</p>
-						<!-- Navigation buttons -->
-						<button type="submit" class="btn btn-warning">My Bookshelf
-						</button>
-						<button class="btn btn-warning" onclick="window.location.href='profile.html';" style="margin-left:20px;">My Profile</button>
-						<!-- Search form -->
-						<div class="active-purple-3 active-purple-4 mb-4">
-							<input class="form-control" type="text" placeholder="Search" aria-label="Search">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+				<div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-xs-5" id = "rightCorner" style="background-color: white; padding: 2.3%;">
+					<!--- LOG IN FORM  ------------------------------------------------------------>
+					<?php
+							if(!isset($_SESSION['user_id']))
+								print '
+								<form action = "login.php" method = "post">
+							<div class="form-group">
+								<label for="exampleInputEmail1" style="color: 	333300;">Email address
+								</label>
+								<input type="email" class="form-control" name="logemail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email@email.com">
+								<small id="emailHelp" class="form-text text-muted" style="color: blue;">We will never share your email with anyone else.
+								</small>
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1" style="color: 	333300;">Password
+								</label>
+								<input type="password" class="form-control" name="logpwd" id="exampleInputPassword1" placeholder="Password...">
+							</div>
+							<div class="form-group form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1" style="color: 	333300;">Remember me
+								</label>
+							</div>
+							<div class="container" style="margin: 0;">
+								<div class="input-group">
+									<div class="row" style="flex: 1; padding-left: 20px; padding-right: 20px;">
+										<!-- Log in button -->
+										<button type="submit" class="btn btn-warning" name = "login-submit">Log in
+										</button>
+										<!-- Register button -->
+										<a class="btn btn-warning" href ="register.php" style="margin-left:20px;">Register
+										</a>
+									</form>';
+							else{
+								print '<div class="login-corner"><p style="padding: 25px; margin-top: 30px;">
+								Hello, '.$_SESSION["user_id"].'. Welcome back!
+								<br></p><a class="btn btn-warning" href = "bookshelf.php">My Bookshelf</a><a class="btn btn-warning" href="profile.php";" style="margin-left:20px;">My Profile</a><a class="btn btn-warning" href = "logout.php" style="margin-left:20px;">Log out</a>';
+							}
+						 ?>
+				 <!-- Search form -->
+				 <!-- <div class="active-purple-3 active-purple-4 mb-4">
+					 <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+				 </div> -->
+			 </div>
+		 </div>
+	 </div>
+ </div>
 
 	<!-- Contact Container -->
 	<div style="margin-left: 70px; margin-right:70px;">

@@ -1,9 +1,9 @@
-<?php session_start ?>
-<?php require "dbh.php" ?>
+<?php session_start(); ?>
+<?php include "dbh.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>What To Read</title>
+  <title>What To Read | Browse</title>
   <meta charset="UTF-8">
   <meta name="author" content="Mihaela McReynolds">
   <meta name="description" content="What To Read-group project for Internet Software Development class at PSTCC. Team: Mihaela McReynolds, Annette Farah">
@@ -56,24 +56,59 @@
           </nav>
         </div>
         <!-- Top Right corner -->
-        <div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-xs-5" style="padding: 0;">
-          <div class="login-corner">
-            <p style="padding: 25px; margin-top: 30px;">
-              Hello, Johanna!</br>
-            </p>
-            <!-- Navigation buttons -->
-            <button type="submit" class="btn btn-warning">My Bookshelf
-            </button>
-            <button class="btn btn-warning" onclick="window.location.href='profile.php';" style="margin-left:20px;">My Profile</button>
-            <!-- Search form -->
-            <div class="active-purple-3 active-purple-4 mb-4">
-              <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
+				<div class="col-xl-4 col-lg-4 col-md-5 col-sm-5 col-xs-5" id = "rightCorner" style="background-color: white; padding: 2.3%;">
+					<!--- LOG IN FORM  ------------------------------------------------------------>
+					<?php
+							if(!isset($_SESSION['user_id']))
+							  print '
+                <form action = "login.php" method = "post">
+              <div class="form-group">
+                <label for="exampleInputEmail1" style="color: 	333300;">Email address
+                </label>
+                <input type="email" class="form-control" name="logemail" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email@email.com">
+                <small id="emailHelp" class="form-text text-muted" style="color: blue;">We will never share your email with anyone else.
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1" style="color: 	333300;">Password
+                </label>
+                <input type="password" class="form-control" name="logpwd" id="exampleInputPassword1" placeholder="Password...">
+              </div>
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1" style="color: 	333300;">Remember me
+                </label>
+              </div>
+              <div class="container" style="margin: 0;">
+                <div class="input-group">
+                  <div class="row" style="flex: 1; padding-left: 20px; padding-right: 20px;">
+                    <!-- Log in button -->
+                    <button type="submit" class="btn btn-warning" name = "login-submit">Log in
+                    </button>
+                    <!-- Register button -->
+                    <a class="btn btn-warning" href ="register.php" style="margin-left:20px;">Register
+                    </a>
+                  </form>';
+							else{
+								print '<div class="login-corner"><p style="padding: 25px; margin-top: 30px;">
+	              Hello, '.$_SESSION["user_id"].'. Welcome back!
+	              <br></p><a class="btn btn-warning" href = "bookshelf.php">My Bookshelf</a><a class="btn btn-warning" href="profile.php";" style="margin-left:20px;">My Profile</a><a class="btn btn-warning" href = "logout.php" style="margin-left:20px;">Log out</a>';
+	            }
+						 ?>
+           <!-- Search form -->
+           <!-- <div class="active-purple-3 active-purple-4 mb-4">
+             <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+           </div> -->
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+</header>
+</body>
+</html>
+<main>
   <!-- Page body -->
   <!-- Carousel with 4 items at a time -->
   <div class="container text-center my-3">
@@ -82,28 +117,28 @@
       <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
         <div class="carousel-inner w-100" role="listbox">
           <div class="carousel-item active">
-            <img class="d-block col-3 img-fluid" src="images/bookofthief.png">
+            <img class="d-block col-3 img-fluid" src="images/bookofthief.png" style="width: 80%;">
           </div>
           <div class="carousel-item">
-            <img class="d-block col-3 img-fluid" src="images/henrietta.jpg">
+            <img class="d-block col-3 img-fluid" src="images/henrietta.jpg" style="width: 140px;">
           </div>
           <div class="carousel-item">
-            <img class="d-block col-3 img-fluid" src="images/light.jpg">
+            <img class="d-block col-3 img-fluid" src="images/light.jpg" style="width: 140px;">
           </div>
           <div class="carousel-item">
-            <img class="d-block col-3 img-fluid" src="images/waterforelephants.png">
+            <img class="d-block col-3 img-fluid" src="images/waterforelephants.png" style="width: 140px;">
           </div>
           <div class="carousel-item">
-            <img class="d-block col-3 img-fluid" src="images/train.jpg">
+            <img class="d-block col-3 img-fluid" src="images/train.jpg" style="width: 140px;">
           </div>
           <div class="carousel-item">
-            <img class="d-block col-3 img-fluid" src="images/wonder.jpg">
+            <img class="d-block col-3 img-fluid" src="images/wonder.jpg" style="width: 140px;">
           </div>
           <div class="carousel-item">
-            <img class="d-block col-3 img-fluid" src="images/turtles.jpg">
+            <img class="d-block col-3 img-fluid" src="images/turtles.jpg" style="width: 140px;">
           </div>
           <div class="carousel-item">
-            <img class="d-block col-3 img-fluid" src="images/s5.jpg">
+            <img class="d-block col-3 img-fluid" src="images/s5.jpg" style="width: 140px;">
           </div>
         </div>
         <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
